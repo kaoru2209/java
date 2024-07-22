@@ -1,0 +1,118 @@
+package com.example.menuapp;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class MainActivity extends AppCompatActivity {
+    public static int totalcount=0;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        TextView totalPrice = findViewById(R.id.totalPrice);
+
+
+        Button curreyBtnP = findViewById(R.id.btnCurryP);
+        curreyBtnP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TextView curryNum = findViewById(R.id.curryNum);
+                curryNum.setText(String.valueOf(Integer.parseInt(curryNum.getText().toString())+1));
+                totalPrice.setText(String.valueOf(totalcount+=400));
+            }
+        });
+        Button curreyBtnM = findViewById(R.id.btnCurryM);
+        curreyBtnM.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TextView curryNum = findViewById(R.id.curryNum);
+                if (Integer.parseInt(curryNum.getText().toString())>0){
+                    totalPrice.setText(String.valueOf(totalcount-=400));
+                    curryNum.setText(String.valueOf(Integer.parseInt(curryNum.getText().toString())-1));
+                }
+            }
+        });
+
+        Button teishokuBtnP = findViewById(R.id.btnTeishokuP);
+        teishokuBtnP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TextView teishokuNum = findViewById(R.id.teishokuNum);
+                teishokuNum.setText(String.valueOf(Integer.parseInt(teishokuNum.getText().toString())+1));
+                totalPrice.setText(String.valueOf(totalcount+=550));
+            }
+        });
+        Button teishokuBtnM = findViewById(R.id.btnTeishokuM);
+        teishokuBtnM.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TextView teishokuNum = findViewById(R.id.teishokuNum);
+                if (Integer.parseInt(teishokuNum.getText().toString())>0){
+                    totalPrice.setText(String.valueOf(totalcount-=550));
+                    teishokuNum.setText(String.valueOf(Integer.parseInt(teishokuNum.getText().toString())-1));
+                }
+
+            }
+        });
+
+        Button udonBtnP = findViewById(R.id.btnUdonP);
+        udonBtnP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TextView udonNum = findViewById(R.id.udonNum);
+                udonNum.setText(String.valueOf(Integer.parseInt(udonNum.getText().toString())+1));
+                totalPrice.setText(String.valueOf(totalcount+=300));
+            }
+        });
+        Button udonBtnM = findViewById(R.id.btnUdonM);
+        udonBtnM.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TextView udonNum = findViewById(R.id.udonNum);
+                if (Integer.parseInt(udonNum.getText().toString())>0){
+                    totalPrice.setText(String.valueOf(totalcount+=300));
+                    udonNum.setText(String.valueOf(Integer.parseInt(udonNum.getText().toString())-1));
+                }
+            }
+        });
+        Button sumBtn = findViewById(R.id.btnSum);
+        sumBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TextView money = findViewById(R.id.money);
+                String test = money.getText().toString();
+                int moneycount = (test.equals(""))? 0 : Integer.parseInt(money.getText().toString());
+
+                TextView retrunMoney = findViewById(R.id.retrunMoney);
+                int retruncount = moneycount - totalcount;
+                retrunMoney.setText(String.valueOf(retruncount));
+            }
+        });
+        Button cleaBtn = findViewById(R.id.btnClea);
+        cleaBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayList<Integer> allCount = new ArrayList<>();
+                Collections.addAll(allCount,R.id.curryNum,R.id.teishokuNum,R.id.udonNum,R.id.totalPrice,R.id.money,R.id.retrunMoney);
+                for(int i=0;i < allCount.size();i++){
+                    TextView count = findViewById(allCount.get(i));
+                    count.setText(String.valueOf(0));
+                }
+                totalcount=0;
+            }
+        });
+    }
+}
